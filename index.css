@@ -13,6 +13,11 @@
     padding: 20px;
 }
 
+/* Canvas Background */
+#whiteboard-canvas{
+    background-color: white; 
+}
+
 /* Canvas Cursor */
 #whiteboard-canvas:active,
 #whiteboard-canvas:focus {

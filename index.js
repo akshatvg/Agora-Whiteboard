@@ -12,13 +12,13 @@ function changeColor() {
     color = "#000000";
     ctx.strokeStyle = color;
     document.getElementById("colorPicker").value = "#000000";
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 3;
     document.getElementById("colorPicker").click();
     document.getElementById("colorPicker").onchange = function () {
         color = this.value;
         console.log("Color changed to:" + color);
         ctx.strokeStyle = color;
-        ctx.lineWidth = 2;
+        ctx.lineWidth = 3;
     }
 }
 
@@ -37,7 +37,7 @@ var ctx = canvas.getContext("2d");
 ctx.canvas.width = window.innerWidth * dpr;
 ctx.canvas.height = window.innerHeight * dpr;
 ctx.strokeStyle = color;
-ctx.lineWith = 2;
+ctx.lineWith = 3;
 
 // Set up mouse events for drawing
 var drawing = false;
