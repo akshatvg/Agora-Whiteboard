@@ -1,0 +1,72 @@
+/* Outer Div For Canvas  */
+#outer-div {
+    margin: 0;
+    overflow: hidden;
+    z-index: 1;
+    border: 2px solid #1A0274;
+    height: 88vh;
+    width: 100%;
+}
+
+/* Padding */
+.p-20 {
+    padding: 20px;
+}
+
+/* Canvas Cursor */
+#whiteboard-canvas:active,
+#whiteboard-canvas:focus {
+    cursor: crosshair;
+}
+
+/* Tools */
+#tools {
+    z-index: 10;
+    padding: 5px;
+    border-radius: 5px;
+    position: absolute;
+    left: 30px;
+    margin-top: 30px;
+    background: #1A0274;
+}
+
+/* Heading */
+#heading {
+    -webkit-box-shadow: -1px 0px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: -1px 0px 5px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: -1px 0px 5px 0px rgba(0, 0, 0, 0.75);
+    padding: 10px;
+    padding-top: 5px;
+    background: #1A0274;
+    color: white;
+}
+
+/* Tool Buttons */
+.clearBtn,
+.colorBtn,
+.eraserBtn {
+    background-color: #0C9DFD;
+    color: white;
+    border-radius: 5px;
+    border: 1px solid white;
+}
+
+.clearBtn:hover,
+.clearBtn:focus,
+.colorBtn:hover,
+.colorBtn:focus,
+.eraserBtn:hover,
+.eraserBtn:focus {
+    background-color: rgb(2, 133, 221);
+}
+
+/* Margin Y-Axis */
+.my-2 {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+}
+
+/* Displays */
+.d-none {
+    display: none;
+}
