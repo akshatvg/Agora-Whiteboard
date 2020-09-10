@@ -35,7 +35,20 @@ $(document).ready(function () {
     $("#joinChannelModal").modal('open');
 });
 
+// Send Channel Message
+channel.sendMessage({ text: 'test channel message' }).then(() => {
+    /* Your code for handling events, such as a channel message-send success. */
+}).catch(error => {
+    /* Your code for handling events, such as a channel message-send failure. */
+});
+
+// Receive Channel Message
+channel.on('ChannelMessage', ({ text }, senderId) => { // text: text of the received channel message; senderId: user ID of the sender.
+    /* Your code for handling events, such as receiving a channel message. */
+});
+
 // Logout
 function leaveChannel() {
+    channel.leave();
     client.logout()
 }
