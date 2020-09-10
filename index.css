@@ -14,8 +14,8 @@
 }
 
 /* Canvas Background */
-#whiteboard-canvas{
-    background-color: white; 
+#whiteboard-canvas {
+    background-color: white;
 }
 
 /* Canvas Cursor */
@@ -74,4 +74,35 @@
 /* Displays */
 .d-none {
     display: none;
+}
+
+/* Label Focus Color */
+#channelNameInput:focus+label {
+    color: #0C9DFD;
+}
+
+/* Label Underline Focus Color */
+#channelNameInput:focus {
+    border-bottom: 1px solid #0C9DFD;
+    box-shadow: 0 1px 0 0 #0C9DFD;
+}
+
+/* Channel Join Button */
+#joinChannelBtn {
+    background-color: #0C9DFD;
+    color: white;
+    border-radius: 5px;
+}
+
+#joinChannelBtn:hover {
+    background-color: rgb(2, 133, 221);
+}
+
+/* Navbar */
+#navbar{
+    background: #1A0274;
+}
+
+.brand-logo{
+    margin-left: 10px;
 }
