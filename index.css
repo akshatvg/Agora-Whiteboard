@@ -35,15 +35,10 @@
     background: #1A0274;
 }
 
-/* Heading */
-#heading {
-    -webkit-box-shadow: -1px 0px 5px 0px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: -1px 0px 5px 0px rgba(0, 0, 0, 0.75);
-    box-shadow: -1px 0px 5px 0px rgba(0, 0, 0, 0.75);
-    padding: 10px;
-    padding-top: 5px;
-    background: #1A0274;
-    color: white;
+/* Font Size Big */
+.font-size-big{
+    font-size: 23px;
+    margin-left: 10px;
 }
 
 /* Tool Buttons */
