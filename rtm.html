@@ -78,15 +78,33 @@
         <li class="center"><a href="#!" onclick="leaveChannel();">Leave Channel</a></li>
     </ul>
 
-    <!-- Div to Center -->
-    <div class="center p-20">
-        <h1>hi</h1>
+    <!-- Main Div -->
+    <div class="p-20">
+        <div class="row">
+            <!-- Message Form -->
+            <div class="col s12 m4">
+                <div class="grey lighten-4 p-20">
+                    <label for="channelMsg">Channel Message</label>
+                    <textarea placeholder="Type your message here.." id="channelMsg"
+                        class="materialize-textarea"></textarea>
+                    <button id="sendMsgBtn" class="btn waves-effect">Send Message</button>
+                </div>
+            </div>
+            <!-- Messages -->
+            <div class="col s12 m8">
+                <div class="grey lighten-4 p-20">
+                    <div id="messageBox"></div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Channel Join Modal -->
     <div id="joinChannelModal" class="modal">
         <div class="modal-content">
             <h4 class="center">Join Channel</h4>
+            <label for="accountName">User Name</label>
+            <input type="text" placeholder="User Name" id="accountName" />
             <label for="channelNameInput">Channel Name</label>
             <input type="text" placeholder="Channel Name" id="channelNameInput" />
         </div>

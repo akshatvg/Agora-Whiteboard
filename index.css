@@ -77,32 +77,38 @@
 }
 
 /* Label Focus Color */
-#channelNameInput:focus+label {
+#channelNameInput:focus+label,
+#accountName:focus+label,
+#channelMsg:focus+label {
     color: #0C9DFD;
 }
 
 /* Label Underline Focus Color */
-#channelNameInput:focus {
+#channelNameInput:focus,
+#accountName:focus,
+#channelMsg:focus {
     border-bottom: 1px solid #0C9DFD;
     box-shadow: 0 1px 0 0 #0C9DFD;
 }
 
 /* Channel Join Button */
-#joinChannelBtn {
+#joinChannelBtn,
+#sendMsgBtn {
     background-color: #0C9DFD;
     color: white;
     border-radius: 5px;
 }
 
-#joinChannelBtn:hover {
+#joinChannelBtn:hover,
+#sendMsgBtn:hover {
     background-color: rgb(2, 133, 221);
 }
 
 /* Navbar */
-#navbar{
+#navbar {
     background: #1A0274;
 }
 
-.brand-logo{
+.brand-logo {
     margin-left: 10px;
 }
