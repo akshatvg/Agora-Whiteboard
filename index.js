@@ -91,8 +91,6 @@ canvas.addEventListener("mousedown", function (e) {
 }, false);
 canvas.addEventListener("mouseup", function (e) {
     drawing = false;
-    canvas.removeEventListener("mousemove", function (e) {
-    });
 }, false);
 canvas.addEventListener("mousemove", function (e) {
     mousePos = getMousePos(canvas, e);
