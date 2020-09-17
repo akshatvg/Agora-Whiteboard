@@ -86,12 +86,12 @@ var lastPos = mousePos;
 canvas.addEventListener("mousedown", function (e) {
     drawing = true;
     lastPos = getMousePos(canvas, e);
+    canvas.addEventListener("mousemove", function (e) {
+        mousePos = getMousePos(canvas, e);
+    }, false);
 }, false);
 canvas.addEventListener("mouseup", function (e) {
     drawing = false;
-}, false);
-canvas.addEventListener("mousemove", function (e) {
-    mousePos = getMousePos(canvas, e);
 }, false);
 
 // Set up touch events for mobile, etc
@@ -175,30 +175,34 @@ $("#joinChannelBtn").click(function () {
             $("#joinChannelModal").modal('close');
 
             // Send Channel Message
-            canvas.addEventListener("mousedown", function () {
-                var jsonCoordinates = { x: lastPos.x, y: lastPos.y };
-                console.log(jsonCoordinates);
-                msg = { description: 'Coordinates where drawing is taking place.', messageType: 'TEXT', rawMessage: undefined, text: JSON.stringify(jsonCoordinates) }
+            canvas.addEventListener("mousemove", function () {
+                var lastPosNow = { x: lastPos.x, y: lastPos.y };
+                var mousePosNow = { x: mousePos.x, y: mousePos.y };
+                finalPos = { lastPosNow: lastPosNow, mousePosNow: mousePosNow };
+                // Final Coordinates
+                // console.log(finalPos);
+                msg = { description: 'Coordinates where drawing is taking place.', messageType: 'TEXT', rawMessage: undefined, text: JSON.stringify(finalPos) }
                 channel.sendMessage(msg).then(() => {
-                    console.log("Message sent successfully.");
                     drawing = true;
-                    console.log("Your message was: " + JSON.stringify(jsonCoordinates) + " by " + accountName);
+                    console.log("Your message was: " + JSON.stringify(finalPos) + " by " + accountName);
                 }).catch(error => {
                     console.log("Message wasn't sent due to an error: ", error);
                 });
 
                 // Receive Channel Message
                 channel.on('ChannelMessage', ({ text }, senderId) => {
-                    console.log("Message received successfully.");
                     console.log("The message is: " + text + " by " + senderId);
                     parsedCoordinates = JSON.parse(text);
+                    // Parsed Coordinates
+                    // console.log(parsedCoordinates);
                     drawing = true;
                     if (drawing) {
                         console.log("Drawing for others.");
                         ctx.beginPath();
-                        ctx.moveTo(parsedCoordinates.x, parsedCoordinates.y);
-                        ctx.lineTo(parsedCoordinates.x + 1, parsedCoordinates.y + 1);
+                        ctx.moveTo(parsedCoordinates.lastPosNow.x, parsedCoordinates.lastPosNow.y);
+                        ctx.lineTo(parsedCoordinates.mousePosNow.x, parsedCoordinates.mousePosNow.y);
                         ctx.stroke();
+                        parsedCoordinates.lastPosNow = parsedCoordinates.mousePosNow;
                         ctx.closePath();
                     }
                 });
