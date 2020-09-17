@@ -190,24 +190,24 @@ $("#joinChannelBtn").click(function () {
                         console.log("Message wasn't sent due to an error: ", error);
                     });
                 });
+            });
 
-                // Receive Channel Message
-                channel.on('ChannelMessage', ({ text }, senderId) => {
-                    console.log("The message is: " + text + " by " + senderId);
-                    parsedCoordinates = JSON.parse(text);
-                    // Parsed Coordinates
-                    // console.log(parsedCoordinates);
-                    drawing = true;
-                    if (drawing) {
-                        console.log("Drawing for others.");
-                        ctx.beginPath();
-                        ctx.moveTo(parsedCoordinates.lastPosNow.x, parsedCoordinates.lastPosNow.y);
-                        ctx.lineTo(parsedCoordinates.mousePosNow.x, parsedCoordinates.mousePosNow.y);
-                        ctx.stroke();
-                        parsedCoordinates.lastPosNow = parsedCoordinates.mousePosNow;
-                        ctx.closePath();
-                    }
-                });
+            // Receive Channel Message
+            channel.on('ChannelMessage', ({ text }, senderId) => {
+                console.log("The message is: " + text + " by " + senderId);
+                parsedCoordinates = JSON.parse(text);
+                // Parsed Coordinates
+                // console.log(parsedCoordinates);
+                drawing = true;
+                if (drawing) {
+                    console.log("Drawing for others.");
+                    ctx.beginPath();
+                    ctx.moveTo(parsedCoordinates.lastPosNow.x, parsedCoordinates.lastPosNow.y);
+                    ctx.lineTo(parsedCoordinates.mousePosNow.x, parsedCoordinates.mousePosNow.y);
+                    ctx.stroke();
+                    parsedCoordinates.lastPosNow = parsedCoordinates.mousePosNow;
+                    ctx.closePath();
+                }
             });
 
         }).catch(error => {
