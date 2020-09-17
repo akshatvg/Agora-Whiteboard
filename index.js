@@ -1,35 +1,6 @@
 // Color Variable
 var color;
 
-// Clear the canvas
-function clearCanvas() {
-    canvas.width = canvas.width;
-    console.log("Cleared Canvas.");
-}
-
-// Color picker stroke color
-function changeColor() {
-    color = "#000000";
-    ctx.strokeStyle = color;
-    document.getElementById("colorPicker").value = "#000000";
-    ctx.lineWidth = 3;
-    document.getElementById("colorPicker").click();
-    document.getElementById("colorPicker").onchange = function () {
-        color = this.value;
-        console.log("Color changed to:" + color);
-        ctx.strokeStyle = color;
-        ctx.lineWidth = 3;
-    }
-}
-
-// Eraser
-function startErasing() {
-    color = this.value;
-    console.log("Erasing.");
-    ctx.strokeStyle = "#FFFFFF";
-    ctx.lineWidth = 50;
-}
-
 // Set up the canvas
 var canvas = document.getElementById("whiteboard-canvas");
 var dpr = window.devicePixelRatio || 1;
@@ -38,21 +9,6 @@ ctx.canvas.width = window.innerWidth * dpr;
 ctx.canvas.height = window.innerHeight * dpr;
 ctx.strokeStyle = color;
 ctx.lineWith = 3;
-
-// Set up mouse events for drawing
-var drawing = false;
-var mousePos = { x: 0, y: 0 };
-var lastPos = mousePos;
-canvas.addEventListener("mousedown", function (e) {
-    drawing = true;
-    lastPos = getMousePos(canvas, e);
-}, false);
-canvas.addEventListener("mouseup", function (e) {
-    drawing = false;
-}, false);
-canvas.addEventListener("mousemove", function (e) {
-    mousePos = getMousePos(canvas, e);
-}, false);
 
 // Get the position of the mouse relative to the canvas
 function getMousePos(canvasDom, mouseEvent) {
@@ -84,6 +40,8 @@ function renderCanvas() {
         ctx.stroke();
         lastPos = mousePos;
         console.log(lastPos);
+        // singleMessageX = lastPos.x;
+        // singleMessageY = lastPos.y;
         ctx.closePath();
     }
 }
@@ -93,6 +51,52 @@ function renderCanvas() {
     requestAnimFrame(drawLoop);
     renderCanvas();
 })();
+
+// Clear the canvas
+function clearCanvas() {
+    canvas.width = canvas.width;
+    console.log("Cleared Canvas.");
+}
+
+// Color picker stroke color
+function changeColor() {
+    color = "#000000";
+    ctx.strokeStyle = color;
+    document.getElementById("colorPicker").value = "#000000";
+    ctx.lineWidth = 3;
+    document.getElementById("colorPicker").click();
+    document.getElementById("colorPicker").onchange = function () {
+        color = this.value;
+        console.log("Color changed to:" + color);
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 3;
+    }
+}
+
+// Eraser
+function startErasing() {
+    color = this.value;
+    console.log("Erasing.");
+    ctx.strokeStyle = "#FFFFFF";
+    ctx.lineWidth = 50;
+}
+
+// Set up mouse events for drawing
+var drawing = false;
+var mousePos = { x: 0, y: 0 };
+var lastPos = mousePos;
+canvas.addEventListener("mousedown", function (e) {
+    drawing = true;
+    lastPos = getMousePos(canvas, e);
+}, false);
+canvas.addEventListener("mouseup", function (e) {
+    drawing = false;
+    canvas.removeEventListener("mousemove", function (e) {
+    });
+}, false);
+canvas.addEventListener("mousemove", function (e) {
+    mousePos = getMousePos(canvas, e);
+}, false);
 
 // Set up touch events for mobile, etc
 canvas.addEventListener("touchstart", function (e) {
@@ -144,3 +148,77 @@ document.body.addEventListener("touchmove", function (e) {
 }, false);
 
 var dataUrl = canvas.toDataURL();
+
+// Constants
+var agoraAppId = "a6af85f840ef43108491705e2315a857";
+var isLoggedIn = false;
+
+// Auto Init MaterializeCSS
+M.AutoInit();
+
+// RtmClient
+const client = AgoraRTM.createInstance(agoraAppId, { enableLogUpload: false });
+
+// Form Click Event
+$("#joinChannelBtn").click(function () {
+    var accountName = $('#accountName').val();
+
+    // Login
+    client.login({ uid: accountName }).then(() => {
+        console.log('AgoraRTM client login success. Username: ' + accountName);
+        isLoggedIn = true;
+
+        // Channel Join
+        var channelName = $('#channelNameInput').val();
+        channel = client.createChannel(channelName);
+        channel.join().then(() => {
+            console.log('AgoraRTM client channel join success.');
+            $("#joinChannelBtn").prop("disabled", true);
+
+            // Close Channel Join Modal
+            $("#joinChannelModal").modal('close');
+
+            // Send Channel Message
+            canvas.addEventListener("mousedown", function () {
+                var jsonCoordinates = { x: lastPos.x, y: lastPos.y };
+                console.log(jsonCoordinates);
+                msg = { description: 'Coordinates where drawing is taking place.', messageType: 'TEXT', rawMessage: undefined, text: JSON.stringify(jsonCoordinates) }
+                channel.sendMessage(msg).then(() => {
+                    console.log("Message sent successfully.");
+                    drawing = true;
+                    console.log("Your message was: " + JSON.stringify(jsonCoordinates) + " by " + accountName);
+                }).catch(error => {
+                    console.log("Message wasn't sent due to an error: ", error);
+                });
+
+                // Receive Channel Message
+                channel.on('ChannelMessage', ({ text }, senderId) => {
+                    console.log("Message received successfully.");
+                    console.log("The message is: " + text + " by " + senderId);
+                    drawing = true;
+                });
+            });
+
+        }).catch(error => {
+            console.log('AgoraRTM client channel join failed: ', error);
+        }).catch(err => {
+            console.log('AgoraRTM client login failure: ', err);
+        });
+    });
+});
+
+// Show Form on Page Load
+$(document).ready(function () {
+    $('#joinChannelModal').modal();
+    $("#joinChannelModal").modal('open');
+});
+
+// Logout
+function leaveChannel() {
+    channel.leave();
+    client.logout();
+    isLoggedIn = false;
+    $("#joinChannelBtn").prop("disabled", false);
+    $("#joinChannelModal").modal('open');
+    console.log("Channel left successfully and user has been logged out.");
+}
