@@ -175,18 +175,20 @@ $("#joinChannelBtn").click(function () {
             $("#joinChannelModal").modal('close');
 
             // Send Channel Message
-            canvas.addEventListener("mousemove", function () {
-                var lastPosNow = { x: lastPos.x, y: lastPos.y };
-                var mousePosNow = { x: mousePos.x, y: mousePos.y };
-                finalPos = { lastPosNow: lastPosNow, mousePosNow: mousePosNow };
-                // Final Coordinates
-                // console.log(finalPos);
-                msg = { description: 'Coordinates where drawing is taking place.', messageType: 'TEXT', rawMessage: undefined, text: JSON.stringify(finalPos) }
-                channel.sendMessage(msg).then(() => {
-                    drawing = true;
-                    console.log("Your message was: " + JSON.stringify(finalPos) + " by " + accountName);
-                }).catch(error => {
-                    console.log("Message wasn't sent due to an error: ", error);
+            canvas.addEventListener("mousedown", function () {
+                canvas.addEventListener("mousemove", function () {
+                    var lastPosNow = { x: lastPos.x, y: lastPos.y };
+                    var mousePosNow = { x: mousePos.x, y: mousePos.y };
+                    finalPos = { lastPosNow: lastPosNow, mousePosNow: mousePosNow };
+                    // Final Coordinates
+                    // console.log(finalPos);
+                    msg = { description: 'Coordinates where drawing is taking place.', messageType: 'TEXT', rawMessage: undefined, text: JSON.stringify(finalPos) }
+                    channel.sendMessage(msg).then(() => {
+                        drawing = true;
+                        console.log("Your message was: " + JSON.stringify(finalPos) + " by " + accountName);
+                    }).catch(error => {
+                        console.log("Message wasn't sent due to an error: ", error);
+                    });
                 });
 
                 // Receive Channel Message
