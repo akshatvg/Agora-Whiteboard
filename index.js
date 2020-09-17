@@ -39,7 +39,6 @@ function renderCanvas() {
         ctx.lineTo(mousePos.x, mousePos.y);
         ctx.stroke();
         lastPos = mousePos;
-        // console.log(lastPos);
         ctx.closePath();
     }
 }
@@ -81,7 +80,8 @@ function startErasing() {
 
 // Set up mouse events for drawing
 var drawing = false;
-var mousePos = { x: 0, y: 0 };
+var x, y;
+var mousePos = { x: x, y: y };
 var lastPos = mousePos;
 canvas.addEventListener("mousedown", function (e) {
     drawing = true;
@@ -177,6 +177,7 @@ $("#joinChannelBtn").click(function () {
             // Send Channel Message
             canvas.addEventListener("mousedown", function () {
                 canvas.addEventListener("mousemove", function () {
+                    drawing = true;
                     var lastPosNow = { x: lastPos.x, y: lastPos.y };
                     var mousePosNow = { x: mousePos.x, y: mousePos.y };
                     finalPos = { lastPosNow: lastPosNow, mousePosNow: mousePosNow };
@@ -184,12 +185,16 @@ $("#joinChannelBtn").click(function () {
                     // console.log(finalPos);
                     msg = { description: 'Coordinates where drawing is taking place.', messageType: 'TEXT', rawMessage: undefined, text: JSON.stringify(finalPos) }
                     channel.sendMessage(msg).then(() => {
-                        drawing = true;
                         console.log("Your message was: " + JSON.stringify(finalPos) + " by " + accountName);
                     }).catch(error => {
                         console.log("Message wasn't sent due to an error: ", error);
                     });
                 });
+            });
+
+            // Mouse Up
+            canvas.addEventListener("mouseup", function () {
+                drawing = false;
             });
 
             // Receive Channel Message
