@@ -39,9 +39,7 @@ function renderCanvas() {
         ctx.lineTo(mousePos.x, mousePos.y);
         ctx.stroke();
         lastPos = mousePos;
-        console.log(lastPos);
-        // singleMessageX = lastPos.x;
-        // singleMessageY = lastPos.y;
+        // console.log(lastPos);
         ctx.closePath();
     }
 }
@@ -193,7 +191,16 @@ $("#joinChannelBtn").click(function () {
                 channel.on('ChannelMessage', ({ text }, senderId) => {
                     console.log("Message received successfully.");
                     console.log("The message is: " + text + " by " + senderId);
+                    parsedCoordinates = JSON.parse(text);
                     drawing = true;
+                    if (drawing) {
+                        console.log("Drawing for others.");
+                        ctx.beginPath();
+                        ctx.moveTo(parsedCoordinates.x, parsedCoordinates.y);
+                        ctx.lineTo(parsedCoordinates.x + 1, parsedCoordinates.y + 1);
+                        ctx.stroke();
+                        ctx.closePath();
+                    }
                 });
             });
 
