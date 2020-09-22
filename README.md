@@ -1,55 +1,32 @@
-# lastMinutePPT
+# Agora Whiteboard SDK
 
-[![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/akshatvg/lastMinutePPT?logo=github&style=social)](https://github.com/akshatvg/) [![GitHub last commit](https://img.shields.io/github/last-commit/akshatvg/lastMinutePPT?style=social&logo=git)](https://github.com/akshatvg/) [![GitHub stars](https://img.shields.io/github/stars/akshatvg/lastMinutePPT?style=social)](https://github.com/akshatvg/lastMinutePPT/stargazers) [![GitHub forks](https://img.shields.io/github/forks/akshatvg/lastMinutePPT?style=social&logo=git)](https://github.com/akshatvg/lastMinutePPT/network)
+[![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/akshatvg/Agora-Whiteboard-SDK?logo=github&style=social)](https://github.com/akshatvg/) [![GitHub last commit](https://img.shields.io/github/last-commit/akshatvg/Agora-Whiteboard-SDK?style=social&logo=git)](https://github.com/akshatvg/) [![GitHub stars](https://img.shields.io/github/stars/akshatvg/Agora-Whiteboard-SDK?style=social)](https://github.com/akshatvg/Agora-Whiteboard-SDK/stargazers) [![GitHub forks](https://img.shields.io/github/forks/akshatvg/Agora-Whiteboard-SDK?style=social&logo=git)](https://github.com/akshatvg/Agora-Whiteboard-SDK/network)
 
-Project which automatically generates crucial presentation slides based on what you say in real time.
+A Whiteboard SDK for Agora.io made completely from scratch using RTM.
 
 <p align="center">
-<a href="https://lmppt.akshatvg.com/">
-<img src="https://github.com/akshatvg/lastMinutePPT/blob/master/Assets/app-icon-64%402x.png" width="120px" height="120px" alt="lastMinutePPT Logo"/>
+<a href="https://whiteboard.akshatvg.com">
+<img src="src/logo.png" height="70px" alt="Agora Logo"/>
 </a>
 </p>
 
-![Generic badge](https://img.shields.io/badge/Last_Minute-PPTs-orange) 
+![Generic badge](https://img.shields.io/badge/Agora_Whiteboard-SDK-orange) 
 
-#### Link for [demo](https://lmppt.akshatvg.com/) 
-[![Generic badge](https://img.shields.io/badge/view-demo-orange)](https://lmppt.akshatvg.com/)
+#### Link for [demo](https://whiteboard.akshatvg.com) 
+[![Generic badge](https://img.shields.io/badge/view-demo-orange)](https://whiteboard.akshatvg.com)
 
 
 ## Requirements
 
-[![GitHub top language](https://img.shields.io/github/languages/top/akshatvg/lastMinutePPT?logo=javascript&style=social)](https://github.com/akshatvg/)
+[![GitHub top language](https://img.shields.io/github/languages/top/akshatvg/Agora-Whiteboard-SDK?logo=javascript&style=social)](https://github.com/akshatvg/)
 
 The source code of this project is written in **`HTML/CSS/JS`**. So, you do not require anything extra to run this project.
 
-## Instructions
-This project requires two processes to run.
-
-First, `git clone` our repository.
-
-Then, create the virtualenv:
+## Instructions to run
 ```bash
-python3 -m pip install virtualenv
-mkvirtualenv hack --python 3.6
-source ~/hack/bin/activate
-pip install -r ~/lastMinutePPT/reqs.txt
-```
-*NOTE: we may be missing some requirements. This is most likely not up to date.*
-
-Then, open up tmux and run two sessions:
-
-tmux pane 1:
-```bash
-cd ~/lastMinutePPT/data
-source ~/hack/bin/activate
-python3 server.py (requires restart on changes made to main_function.py)
-```
-
-tmux pane 2:
-```bash
-cd ~/lastMinutePPT/
-source ~/hack/bin/activate
-python3 manage.py runserver (does not require restart)
+$ git clone https://github.com/akshatvg/Agora-Whiteboard-SDK
+$ cd Agora-Whiteboard-SDK
+$ live-server
 ```
 
 ```bash
@@ -88,9 +65,9 @@ ______      _               _   _               _
 
 ## License
 
-**MIT &copy; [Akshat Gupta](https://github.com/akshatvg/lastMinutePPT/blob/master/LICENSE)**
+**MIT &copy; [Akshat Gupta](https://github.com/akshatvg/Agora-Whiteboard-SDK/blob/master/LICENSE)**
 
-[![GitHub license](https://img.shields.io/github/license/akshatvg/lastMinutePPT?style=social&logo=github)](https://github.com/akshatvg/lastMinutePPT/blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/akshatvg/Agora-Whiteboard-SDK?style=social&logo=github)](https://github.com/akshatvg/Agora-Whiteboard-SDK/blob/master/LICENSE)
 
 ---------
 

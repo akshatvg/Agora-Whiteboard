@@ -175,7 +175,9 @@ $("#joinChannelBtn").click(function () {
             $("#joinChannelModal").modal('close');
 
             // Send Channel Message
+            // Mouse Down
             canvas.addEventListener("mousedown", function () {
+                // Mouse Move
                 canvas.addEventListener("mousemove", function () {
                     drawing = true;
                     var lastPosNow = { x: lastPos.x, y: lastPos.y };
@@ -190,11 +192,10 @@ $("#joinChannelBtn").click(function () {
                         console.log("Message wasn't sent due to an error: ", error);
                     });
                 });
-            });
-
-            // Mouse Up
-            canvas.addEventListener("mouseup", function () {
-                drawing = false;
+                // Mouse Up
+                canvas.addEventListener("mouseup", function () {
+                    drawing = false;
+                });
             });
 
             // Receive Channel Message
