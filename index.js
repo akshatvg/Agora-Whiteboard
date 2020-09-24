@@ -179,19 +179,21 @@ $("#joinChannelBtn").click(function () {
             canvas.addEventListener("mousedown", function () {
                 // Mouse Move
                 canvas.addEventListener("mousemove", function () {
-                    // Mouse Positions
-                    var lastPosNow = { x: lastPos.x, y: lastPos.y };
-                    var mousePosNow = { x: mousePos.x, y: mousePos.y };
-                    // Final Message
-                    var colorNow;
-                    var finalMsg = { lastPosNow: lastPosNow, mousePosNow: mousePosNow, drawing: drawing };
-                    // console.log(finalMsg);
-                    msg = { description: 'Coordinates where drawing is taking place.', messageType: 'TEXT', rawMessage: undefined, text: JSON.stringify(finalMsg) }
-                    channel.sendMessage(msg).then(() => {
-                        console.log("Your message was: " + JSON.stringify(finalMsg) + " by " + accountName);
-                    }).catch(error => {
-                        console.log("Message wasn't sent due to an error: ", error);
-                    });
+                    if (drawing == true) {
+                        // Mouse Positions
+                        var lastPosNow = { x: lastPos.x, y: lastPos.y };
+                        var mousePosNow = { x: mousePos.x, y: mousePos.y };
+                        // Final Message
+                        var colorNow;
+                        var finalMsg = { lastPosNow: lastPosNow, mousePosNow: mousePosNow, drawing: drawing };
+                        // console.log(finalMsg);
+                        msg = { description: 'Coordinates where drawing is taking place.', messageType: 'TEXT', rawMessage: undefined, text: JSON.stringify(finalMsg) }
+                        channel.sendMessage(msg).then(() => {
+                            console.log("Your message was: " + JSON.stringify(finalMsg) + " by " + accountName);
+                        }).catch(error => {
+                            console.log("Message wasn't sent due to an error: ", error);
+                        });
+                    }
                 });
             });
 
