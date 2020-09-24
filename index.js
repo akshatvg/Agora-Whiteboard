@@ -8,7 +8,7 @@ var ctx = canvas.getContext("2d");
 ctx.canvas.width = window.innerWidth * dpr;
 ctx.canvas.height = window.innerHeight * dpr;
 ctx.strokeStyle = color;
-ctx.lineWith = 3;
+ctx.lineWidth = 4;
 
 // Get the position of the mouse relative to the canvas
 function getMousePos(canvasDom, mouseEvent) {
@@ -60,13 +60,13 @@ function changeColor() {
     color = "#000000";
     ctx.strokeStyle = color;
     document.getElementById("colorPicker").value = "#000000";
-    ctx.lineWidth = 3;
+    ctx.lineWidth = 4;
     document.getElementById("colorPicker").click();
     document.getElementById("colorPicker").onchange = function () {
         color = this.value;
         console.log("Color changed to:" + color);
         ctx.strokeStyle = color;
-        ctx.lineWidth = 3;
+        ctx.lineWidth = 4;
     }
 }
 
@@ -179,39 +179,35 @@ $("#joinChannelBtn").click(function () {
             canvas.addEventListener("mousedown", function () {
                 // Mouse Move
                 canvas.addEventListener("mousemove", function () {
-                    drawing = true;
+                    // Mouse Positions
                     var lastPosNow = { x: lastPos.x, y: lastPos.y };
                     var mousePosNow = { x: mousePos.x, y: mousePos.y };
-                    finalPos = { lastPosNow: lastPosNow, mousePosNow: mousePosNow };
-                    // Final Coordinates
-                    // console.log(finalPos);
-                    msg = { description: 'Coordinates where drawing is taking place.', messageType: 'TEXT', rawMessage: undefined, text: JSON.stringify(finalPos) }
+                    // Final Message
+                    var colorNow;
+                    var finalMsg = { lastPosNow: lastPosNow, mousePosNow: mousePosNow, drawing: drawing };
+                    // console.log(finalMsg);
+                    msg = { description: 'Coordinates where drawing is taking place.', messageType: 'TEXT', rawMessage: undefined, text: JSON.stringify(finalMsg) }
                     channel.sendMessage(msg).then(() => {
-                        console.log("Your message was: " + JSON.stringify(finalPos) + " by " + accountName);
+                        console.log("Your message was: " + JSON.stringify(finalMsg) + " by " + accountName);
                     }).catch(error => {
                         console.log("Message wasn't sent due to an error: ", error);
                     });
-                });
-                // Mouse Up
-                canvas.addEventListener("mouseup", function () {
-                    drawing = false;
                 });
             });
 
             // Receive Channel Message
             channel.on('ChannelMessage', ({ text }, senderId) => {
                 console.log("The message is: " + text + " by " + senderId);
-                parsedCoordinates = JSON.parse(text);
+                parsedFinalNow = JSON.parse(text);
                 // Parsed Coordinates
-                // console.log(parsedCoordinates);
-                drawing = true;
-                if (drawing) {
+                // console.log(parsedFinalNow);
+                if (parsedFinalNow.drawing == true) {
                     console.log("Drawing for others.");
                     ctx.beginPath();
-                    ctx.moveTo(parsedCoordinates.lastPosNow.x, parsedCoordinates.lastPosNow.y);
-                    ctx.lineTo(parsedCoordinates.mousePosNow.x, parsedCoordinates.mousePosNow.y);
+                    ctx.moveTo(parsedFinalNow.lastPosNow.x, parsedFinalNow.lastPosNow.y);
+                    ctx.lineTo(parsedFinalNow.mousePosNow.x, parsedFinalNow.mousePosNow.y);
                     ctx.stroke();
-                    parsedCoordinates.lastPosNow = parsedCoordinates.mousePosNow;
+                    parsedFinalNow.lastPosNow = parsedFinalNow.mousePosNow;
                     ctx.closePath();
                 }
             });
