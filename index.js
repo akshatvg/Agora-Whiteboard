@@ -57,7 +57,8 @@ function clearCanvas() {
 
 // Color picker stroke color
 function changeColor() {
-    color = "#000000";
+    erasing = false;
+    color = "#000000";;
     ctx.strokeStyle = color;
     document.getElementById("colorPicker").value = "#000000";
     ctx.lineWidth = 4;
@@ -72,14 +73,16 @@ function changeColor() {
 
 // Eraser
 function startErasing() {
-    color = this.value;
+    color = "#FFFFFF";
     console.log("Erasing.");
     ctx.strokeStyle = "#FFFFFF";
     ctx.lineWidth = 50;
+    erasing = true;
 }
 
 // Set up mouse events for drawing
 var drawing = false;
+var erasing = false;
 var x, y;
 var mousePos = { x: x, y: y };
 var lastPos = mousePos;
@@ -184,8 +187,7 @@ $("#joinChannelBtn").click(function () {
                         var lastPosNow = { x: lastPos.x, y: lastPos.y };
                         var mousePosNow = { x: mousePos.x, y: mousePos.y };
                         // Final Message
-                        console.log(color);
-                        var finalMsg = { lastPosNow: lastPosNow, mousePosNow: mousePosNow, drawing: drawing, color: color };
+                        var finalMsg = { lastPosNow: lastPosNow, mousePosNow: mousePosNow, drawing: drawing, color: color, erasing: erasing };
                         // console.log(finalMsg);
                         msg = { description: 'Coordinates where drawing is taking place.', messageType: 'TEXT', rawMessage: undefined, text: JSON.stringify(finalMsg) }
                         channel.sendMessage(msg).then(() => {
@@ -204,14 +206,29 @@ $("#joinChannelBtn").click(function () {
                 // Parsed Coordinates
                 // console.log(parsedFinalNow);
                 if (parsedFinalNow.drawing == true) {
-                    console.log("Drawing for others.");
-                    ctx.strokeStyle = parsedFinalNow.color;
-                    ctx.beginPath();
-                    ctx.moveTo(parsedFinalNow.lastPosNow.x, parsedFinalNow.lastPosNow.y);
-                    ctx.lineTo(parsedFinalNow.mousePosNow.x, parsedFinalNow.mousePosNow.y);
-                    ctx.stroke();
-                    parsedFinalNow.lastPosNow = parsedFinalNow.mousePosNow;
-                    ctx.closePath();
+                    if (parsedFinalNow.erasing == true) {
+                        console.log("Erasing for others.");
+                        color = "#FFFFFF";
+                        ctx.strokeStyle = "#FFFFFF";
+                        ctx.lineWidth = 50;
+                        ctx.beginPath();
+                        ctx.moveTo(parsedFinalNow.lastPosNow.x, parsedFinalNow.lastPosNow.y);
+                        ctx.lineTo(parsedFinalNow.mousePosNow.x, parsedFinalNow.mousePosNow.y);
+                        ctx.stroke();
+                        parsedFinalNow.lastPosNow = parsedFinalNow.mousePosNow;
+                        ctx.closePath();
+                    }
+                    else {
+                        console.log("Drawing for others.");
+                        ctx.lineWidth = 4;
+                        ctx.strokeStyle = parsedFinalNow.color;
+                        ctx.beginPath();
+                        ctx.moveTo(parsedFinalNow.lastPosNow.x, parsedFinalNow.lastPosNow.y);
+                        ctx.lineTo(parsedFinalNow.mousePosNow.x, parsedFinalNow.mousePosNow.y);
+                        ctx.stroke();
+                        parsedFinalNow.lastPosNow = parsedFinalNow.mousePosNow;
+                        ctx.closePath();
+                    }
                 }
             });
 
