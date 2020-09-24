@@ -1,5 +1,5 @@
 // Color Variable
-var color;
+var color = "#000000";
 
 // Set up the canvas
 var canvas = document.getElementById("whiteboard-canvas");
@@ -184,8 +184,8 @@ $("#joinChannelBtn").click(function () {
                         var lastPosNow = { x: lastPos.x, y: lastPos.y };
                         var mousePosNow = { x: mousePos.x, y: mousePos.y };
                         // Final Message
-                        var colorNow;
-                        var finalMsg = { lastPosNow: lastPosNow, mousePosNow: mousePosNow, drawing: drawing };
+                        console.log(color);
+                        var finalMsg = { lastPosNow: lastPosNow, mousePosNow: mousePosNow, drawing: drawing, color: color };
                         // console.log(finalMsg);
                         msg = { description: 'Coordinates where drawing is taking place.', messageType: 'TEXT', rawMessage: undefined, text: JSON.stringify(finalMsg) }
                         channel.sendMessage(msg).then(() => {
@@ -205,6 +205,7 @@ $("#joinChannelBtn").click(function () {
                 // console.log(parsedFinalNow);
                 if (parsedFinalNow.drawing == true) {
                     console.log("Drawing for others.");
+                    ctx.strokeStyle = parsedFinalNow.color;
                     ctx.beginPath();
                     ctx.moveTo(parsedFinalNow.lastPosNow.x, parsedFinalNow.lastPosNow.y);
                     ctx.lineTo(parsedFinalNow.mousePosNow.x, parsedFinalNow.mousePosNow.y);
