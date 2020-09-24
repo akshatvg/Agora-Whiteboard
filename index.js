@@ -53,12 +53,16 @@ function renderCanvas() {
 function clearCanvas() {
     canvas.width = canvas.width;
     console.log("Cleared Canvas.");
+    erasing = false;
+    color = "#000000";
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 4;
 }
 
 // Color picker stroke color
 function changeColor() {
     erasing = false;
-    color = "#000000";;
+    color = "#000000";
     ctx.strokeStyle = color;
     document.getElementById("colorPicker").value = "#000000";
     ctx.lineWidth = 4;
