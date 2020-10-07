@@ -69,7 +69,7 @@ function changeColor() {
     document.getElementById("colorPicker").click();
     document.getElementById("colorPicker").onchange = function () {
         color = this.value;
-        console.log("Color changed to:" + color);
+        console.log("Color changed to: " + color);
         ctx.strokeStyle = color;
         ctx.lineWidth = 4;
     }
@@ -172,7 +172,7 @@ $("#joinChannelBtn").click(function () {
         isLoggedIn = true;
 
         // Channel Join
-        var channelName = $('#channelNameInput').val();
+        var channelName = $('#channelNameInput').val().toUpperCase();
         channel = client.createChannel(channelName);
         channel.join().then(() => {
             console.log('AgoraRTM client channel join success.');
