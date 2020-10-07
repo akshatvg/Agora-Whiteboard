@@ -1,6 +1,6 @@
 {
   "name": "agora-whiteboard-sdk",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A Whiteboard SDK for Agora.io made completely from scratch using RTM.",
   "main": "index.js",
   "scripts": {
