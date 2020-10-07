@@ -1,6 +1,6 @@
 {
   "name": "agora-whiteboard-sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Whiteboard SDK for Agora.io made completely from scratch using RTM.",
   "main": "index.js",
   "scripts": {
@@ -23,8 +23,5 @@
   "bugs": {
     "url": "https://github.com/akshatvg/Agora-Whiteboard-SDK/issues"
   },
-  "homepage": "https://whiteboard.akshatvg.com",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  }
+  "homepage": "https://whiteboard.akshatvg.com"
 }
