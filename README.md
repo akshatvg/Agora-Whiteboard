@@ -15,6 +15,13 @@ A Whiteboard SDK for Agora.io made completely from scratch using RTM.
 #### Link for [demo](https://whiteboard.akshatvg.com) 
 [![Generic badge](https://img.shields.io/badge/view-demo-orange)](https://whiteboard.akshatvg.com)
 
+## Important Links
+- [NPM Package](https://www.npmjs.com/package/agora-whiteboard-sdk)
+- [Deployed Website](https://whiteboard.akshatvg.com)
+- [RTM Documentation](https://docs.agora.io/en/Real-time-Messaging/API%20Reference/RTM_web/v1.0.0/index.html)
+- [RTM Quickstart Guide](https://docs.agora.io/en/Real-time-Messaging/messaging_web?platform=Web)
+- [Agora.io Website](https://www.agora.io/)
+- [GitHub Repository](https://github.com/akshatvg/Agora-Whiteboard-SDK)
 
 ## Requirements
 
