@@ -23,7 +23,7 @@
   "bugs": {
     "url": "https://github.com/akshatvg/Agora-Whiteboard-SDK/issues"
   },
-  "homepage": "https://github.com/akshatvg/Agora-Whiteboard-SDK#readme",
+  "homepage": "https://whiteboard.akshatvg.com",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
   }

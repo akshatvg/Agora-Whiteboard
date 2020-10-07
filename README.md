@@ -6,7 +6,7 @@ A Whiteboard SDK for Agora.io made completely from scratch using RTM.
 
 <p align="center">
 <a href="https://whiteboard.akshatvg.com">
-<img src="src/logo.png" height="70px" alt="Agora Logo"/>
+<img src="assets/img/logo.png" height="70px" alt="Agora Logo"/>
 </a>
 </p>
 
