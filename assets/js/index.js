@@ -62,9 +62,7 @@ function clearCanvas() {
 // Color picker stroke color
 function changeColor() {
     erasing = false;
-    color = "#000000";
     ctx.strokeStyle = color;
-    document.getElementById("colorPicker").value = "#000000";
     ctx.lineWidth = 4;
     document.getElementById("colorPicker").click();
     document.getElementById("colorPicker").onchange = function () {
