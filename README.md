@@ -2,7 +2,7 @@
 
 [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/akshatvg/Agora-Whiteboard-SDK?logo=github&style=social)](https://github.com/akshatvg/) [![GitHub last commit](https://img.shields.io/github/last-commit/akshatvg/Agora-Whiteboard-SDK?style=social&logo=git)](https://github.com/akshatvg/) [![GitHub stars](https://img.shields.io/github/stars/akshatvg/Agora-Whiteboard-SDK?style=social)](https://github.com/akshatvg/Agora-Whiteboard-SDK/stargazers) [![GitHub forks](https://img.shields.io/github/forks/akshatvg/Agora-Whiteboard-SDK?style=social&logo=git)](https://github.com/akshatvg/Agora-Whiteboard-SDK/network)
 
-A Whiteboard SDK for Agora.io made completely from scratch using RTM.
+A Whiteboard for Agora.io made completely from scratch using RTM.
 
 <p align="center">
 <a href="https://whiteboard.akshatvg.com">
