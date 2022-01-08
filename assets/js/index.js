@@ -141,7 +141,7 @@ document.body.addEventListener("touchmove", function (e) {
 var dataUrl = canvas.toDataURL();
 
 // Constants
-var agoraAppId = "a6af85f840ef43108491705e2315a857";
+var agoraAppId = $('#appid').val();
 var isLoggedIn = false;
 
 // Auto Init MaterializeCSS
@@ -247,3 +247,8 @@ function leaveChannel() {
     $("#joinChannelModal").modal('open');
     console.log("Channel left successfully and user has been logged out.");
 }
+
+module.exports.defaultWhiteboard = { getMousePos, renderCanvas, drawLoop };
+module.exports.changeColor = changeColor;
+module.exports.startErasing = startErasing;
+module.exports.leaveChannel = leaveChannel;
